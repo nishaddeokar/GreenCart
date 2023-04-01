@@ -1,8 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import getDitchCarbonData from './utilities/ditchCarbon';
-import getBarcodeData from './utilities/barcodeConverter';
+import { StatusBar } from "expo-status-bar";
+import { useEffect, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import getDitchCarbonData from "./utilities/ditchCarbon";
+import getBarcodeData from "./utilities/barcodeConverter";
+import Barcode from "./components/Barcode";
 
 export default function App() {
   const [ditchCarbonData, setDitchCarbonData] = useState({});
@@ -11,13 +12,14 @@ export default function App() {
   useEffect(() => {
     getDitchCarbonData(setDitchCarbonData, false);
     getBarcodeData(setBarcodeData, false);
-    console.log(ditchCarbonData);
-    console.log(barcodeData);
+    // console.log(ditchCarbonData);
+    // console.log(barcodeData);
   }, []);
 
   return (
     <View style={styles.container}>
-      <StatusBar style='auto' />
+      <Barcode />
+      <StatusBar style="auto" />
     </View>
   );
 }
@@ -25,8 +27,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
