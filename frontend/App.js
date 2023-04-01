@@ -1,10 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import getDitchCarbonData from './utilities/ditchcarbon';
 
 export default function App() {
+  const [ditchCarbonData, setDitchCarbonData] = useState({});
+
+  useEffect(() => {
+    getDitchCarbonData(setDitchCarbonData);
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>{JSON.stringify(ditchCarbonData)}</Text>
       <StatusBar style='auto' />
     </View>
   );
