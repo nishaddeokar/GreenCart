@@ -605,15 +605,15 @@ export const tempData2 = {
 };
 
 export const tempData3 = {
-  carbon_footprint: 2.45234,
-  name: 'COCA-COLA',
+  carbon_footprint: 3.092626914940425,
+  name: 'Food Beverage',
   manufacturer: 'COCA-COLA',
-  unit: null,
-  manufacturer_declared_carbon_footprint: 2.45234,
-  source_url:
-    'https://www.coca-colacompany.com/content/dam/journey/us/en/reports/coca-cola-business-environmental-social-governance-report-2021.pdf',
-  methodology: 'supplier',
-  manufacturer_reported_kgco2: 2.45234,
-  kgco2: 2.45234,
-  model: 'COCA-COLA',
+  unit: 'kg',
+  country: 'gb',
+  manufacturer_declared_carbon_footprint: 3.092626914940425,
+  source_url: null,
+  methodology: 'product_category',
+  manufacturer_reported_kgco2: 3.092626914940425,
+  kgco2: 3.092626914940425,
+  model: 'Food Beverage',
 };
