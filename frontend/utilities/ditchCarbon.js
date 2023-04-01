@@ -9,12 +9,19 @@ const options = {
   },
 };
 
-export default async function getDitchCarbonData(setDitchCarbonData, useApi) {
+export default async function getDitchCarbonData(
+  { name, manufacturer, category_name },
+  useApi
+) {
   let data = {};
 
   if (useApi) {
     const res = await fetch(
-      'https://api.ditchcarbon.com/v1.0/product?name=Coca-Cola%2520Zero%2520-%2520Can%252033cl&manufacturer=Coca-Cola&price_cents=1399&price_currency=GBP',
+      `https://api.ditchcarbon.com/v1.0/product?name=${encodeURIComponent(
+        name
+      )}&manufacturer=${encodeURIComponent(
+        manufacturer
+      )}&category_name=${encodeURIComponent(category_name)}&country=gb`,
       options
     );
     data = await res.json();
@@ -22,5 +29,5 @@ export default async function getDitchCarbonData(setDitchCarbonData, useApi) {
     data = tempData3;
   }
 
-  setDitchCarbonData(data);
+  return data;
 }
