@@ -1,5 +1,4 @@
 import { StyleSheet, View, Button, Text } from 'react-native';
-import Product from '../components/Product';
 
 export default function HomeScreen({ navigation, route }) {
   return (
