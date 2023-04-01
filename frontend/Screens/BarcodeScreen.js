@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet } from 'react-native';
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import getBarcodeData from '../utilities/barcodeConverter';
-import getDitchCarbonData from '../utilities/ditchCarbon';
+import React, { useState, useEffect } from "react";
+import { Text, StyleSheet } from "react-native";
+import { BarCodeScanner } from "expo-barcode-scanner";
+import getBarcodeData from "../utilities/barcodeConverter";
+import getDitchCarbonData from "../utilities/ditchCarbon";
 
 export default function BarcodeScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
 
   async function getBarCodeScannerPermissions() {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
-    setHasPermission(status === 'granted');
+    setHasPermission(status === "granted");
   }
 
   useEffect(() => {
@@ -24,8 +23,9 @@ export default function BarcodeScreen({ navigation }) {
       false
     );
 
-    navigation.navigate('Home', {
+    navigation.navigate("Home", {
       name: barcodeData.products[0].title,
+      imageURL: barcodeData.products[0].images[0],
       carbonFootprint: ditchCarbonData.carbon_footprint,
     });
   }
@@ -39,7 +39,7 @@ export default function BarcodeScreen({ navigation }) {
 
   return (
     <BarCodeScanner
-      onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+      onBarCodeScanned={handleBarCodeScanned}
       style={StyleSheet.absoluteFillObject}
     />
   );
