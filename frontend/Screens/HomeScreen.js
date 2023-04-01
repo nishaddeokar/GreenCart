@@ -1,13 +1,19 @@
-import { StyleSheet, View, Button, Text } from 'react-native';
+import { StyleSheet, View, Button } from "react-native";
+import Product from "../components/Product";
 
 export default function HomeScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
-      {route.params && <Text>{route.params.name}</Text>}
-      {route.params && <Text>{route.params.carbonFootprint}</Text>}
+      {route.params && (
+        <Product
+          name={route.params.name}
+          imageURL={route.params.imageURL}
+          carbonFootprint={route.params.carbonFootprint}
+        />
+      )}
       <Button
-        title='Scan Product'
-        onPress={() => navigation.navigate('Scan')}
+        title="Scan Product"
+        onPress={() => navigation.navigate("Scan")}
       />
     </View>
   );
@@ -16,8 +22,9 @@ export default function HomeScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
   },
 });
