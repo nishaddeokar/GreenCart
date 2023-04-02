@@ -7,6 +7,7 @@ import {
   Text,
   Image,
 } from 'react-native';
+import Product from '../components/Product';
 
 export default function ConfirmItemScreen({ navigation, route }) {
   return (
@@ -26,9 +27,14 @@ export default function ConfirmItemScreen({ navigation, route }) {
       <View style={{ height: '10%' }} />
       <AppButton
         title='Add Product'
-        onPress={() => navigation.navigate('Scan')}
+        onPress={() =>
+          navigation.navigate('Home', {
+            name: route.params.name,
+            imageURL: route.params.imageURL,
+            carbonFootprint: route.params.carbonFootprint,
+          })
+        }
       />
-
       <View style={{ height: '7%' }} />
       <AppButton title='Cancel' onPress={() => navigation.navigate('Scan')} />
       <View style={{ height: '10%' }} />

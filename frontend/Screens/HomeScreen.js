@@ -1,7 +1,8 @@
-import { StyleSheet, View, Button } from "react-native";
-import Product from "../components/Product";
+import { StyleSheet, View, Button } from 'react-native';
+import Product from '../components/Product';
 
 export default function HomeScreen({ navigation, route }) {
+  console.log(route.params);
   return (
     <View style={styles.container}>
       {route.params && (
@@ -12,8 +13,8 @@ export default function HomeScreen({ navigation, route }) {
         />
       )}
       <Button
-        title="Scan Product"
-        onPress={() => navigation.navigate("Scan")}
+        title='Scan Product'
+        onPress={() => navigation.navigate('Scan')}
       />
     </View>
   );
@@ -22,9 +23,9 @@ export default function HomeScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 10,
   },
 });
