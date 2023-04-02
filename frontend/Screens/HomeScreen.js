@@ -61,9 +61,10 @@ export default function HomeScreen() {
   const navigation = useNavigation();
   const [items, setItems] = useState(data);
 
-  const handleScanPress = () => {
-    navigation.navigate('Scan');
-  };
+  // Calculate the total carbon footprint
+  const totalCarbonFootprint = items.reduce((acc, item) => {
+    return acc + item.carbonFootprint * item.quantity;
+  }, 0);
 
   return (
     <View style={styles.container}>
@@ -84,11 +85,26 @@ export default function HomeScreen() {
         )}
         keyExtractor={(item) => item.id}
       />
+      {/* Total carbon footprint row */}
+      <View
+        style={[
+          styles.itemContainer,
+          { borderTopWidth: 1, borderBottomWidth: 1, marginBottom: 35 },
+        ]}
+      >
+        <Text style={[styles.itemName, { fontWeight: 'bold' }]}>
+          Total Carbon Footprint
+        </Text>
+        <Text style={[styles.itemName, { fontWeight: 'bold' }]}>
+          {totalCarbonFootprint.toFixed(2)}{' '}
+          <Text style={styles.itemCarbonFootprint}>kgco2</Text>
+        </Text>
+      </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            navigation.navigate('Scan'); // navigate to "Scan" page
+            navigation.navigate('Scan');
           }}
         >
           <Text style={styles.buttonText}>Scan</Text>
@@ -137,7 +153,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     // position: 'absolute',
-    bottom: '2.5%',
+    bottom: '1.5%',
     alignSelf: 'center',
   },
   button: {
