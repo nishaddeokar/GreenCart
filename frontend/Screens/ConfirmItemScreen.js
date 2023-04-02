@@ -46,7 +46,10 @@ export default function ConfirmItemScreen({ navigation, route }) {
       <Text style={styles.text2}>
         {route.params.carbonFootprint.toFixed(2)} kgco2
       </Text>
-
+      <View style={styles.quantityContainer}>
+        <Text style={styles.text}>Carbon Rating: </Text>
+        <CarbonDisplay carbonFootprint={route.params.carbonFootprint} />
+      </View>
       <View style={{ height: '5%' }} />
       <View style={styles.quantityContainer}>
         <Text style={styles.text}>Quantity:</Text>
@@ -145,5 +148,35 @@ const AppButton = ({ title, onPress }) => {
 const styles2 = StyleSheet.create({
   appButtonDisabled: {
     backgroundColor: '#000',
+  },
+});
+
+function CarbonDisplay({ carbonFootprint }) {
+  const color = getColorFromCarbonValue(carbonFootprint);
+  return (
+    <View style={styles5.container}>
+      <View style={[styles5.square, { backgroundColor: color }]} />
+    </View>
+  );
+}
+
+function getColorFromCarbonValue(carbonFootprint) {
+  const maxCarbon = 50; // adjust this to your desired maximum carbon value
+  const hue = (1 - carbonFootprint / maxCarbon) * 120; // convert to hue between 0 and 120 degrees
+  return `hsl(${hue}, 100%, 50%)`;
+}
+
+const styles5 = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  square: {
+    width: 20,
+    height: 20,
+    marginRight: 10,
+  },
+  text: {
+    fontSize: 20,
   },
 });
