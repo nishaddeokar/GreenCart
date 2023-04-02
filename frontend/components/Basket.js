@@ -6,6 +6,11 @@ import { useAppContext } from '../context/AppContext';
 export default function Basket() {
   const { basket } = useAppContext();
 
+  // Calculate the total carbon footprint
+  const totalCarbonFootprint = basket.reduce((acc, item) => {
+    return acc + item.carbonFootprint * item.quantity;
+  }, 0);
+
   return (
     <>
       {basket && (

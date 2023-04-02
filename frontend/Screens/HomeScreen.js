@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Basket from '../components/Basket';
+import { useAppContext } from '../context/AppContext';
 
 export default function HomeScreen() {
+  const { basket } = useAppContext();
   const navigation = useNavigation();
 
   // Calculate the total carbon footprint
-  const totalCarbonFootprint = items.reduce((acc, item) => {
+  const totalCarbonFootprint = basket.reduce((acc, item) => {
     return acc + item.carbonFootprint * item.quantity;
   }, 0);
 
@@ -18,9 +20,31 @@ export default function HomeScreen() {
         <Text style={styles.headingText}>Total</Text>
       </View>
       <Basket />
-      <TouchableOpacity style={styles.scanButton} onPress={handleScanPress}>
-        <Text style={styles.scanButtonText}>Scan Product</Text>
-      </TouchableOpacity>
+      {/* Total carbon footprint row */}
+      <View
+        style={[
+          styles.itemContainer,
+          { borderTopWidth: 1, borderBottomWidth: 1, marginBottom: 35 },
+        ]}
+      >
+        <Text style={[styles.itemName, { fontWeight: 'bold' }]}>
+          Total Carbon Footprint
+        </Text>
+        <Text style={[styles.itemName, { fontWeight: 'bold' }]}>
+          {totalCarbonFootprint.toFixed(2)}{' '}
+          <Text style={styles.itemCarbonFootprint}>kgco2</Text>
+        </Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate('Scan');
+          }}
+        >
+          <Text style={styles.buttonText}>Scan</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
