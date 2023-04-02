@@ -1,9 +1,9 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 export default function Leader({ rank, username, score }) {
   const isEven = rank % 2 === 0;
-  const backgroundColor = isEven ? '#f2f2f2' : 'white';
+  const backgroundColor = isEven ? "#f2f2f2" : "white";
 
   return (
     <View style={[styles.container, { backgroundColor }]}>
@@ -21,18 +21,18 @@ export default function Leader({ rank, username, score }) {
 }
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: -10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
     paddingVertical: 10,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   box: {
     borderRadius: 5,
     padding: 10,
   },
   text: {
-    fontWeight: 'normal',
+    fontWeight: "normal",
   },
 });
