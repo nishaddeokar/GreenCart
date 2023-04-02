@@ -161,8 +161,14 @@ function CarbonDisplay({ carbonFootprint }) {
 }
 
 function getColorFromCarbonValue(carbonFootprint) {
+  const minCarbon = 0; // adjust this to your desired minimum carbon value
   const maxCarbon = 50; // adjust this to your desired maximum carbon value
-  const hue = (1 - carbonFootprint / maxCarbon) * 120; // convert to hue between 0 and 120 degrees
+  const range = maxCarbon - minCarbon;
+  const normalizedValue = Math.min(
+    Math.max(carbonFootprint - minCarbon, 0) / range,
+    1
+  );
+  const hue = ((1 - normalizedValue) * 120).toString(10);
   return `hsl(${hue}, 100%, 50%)`;
 }
 
