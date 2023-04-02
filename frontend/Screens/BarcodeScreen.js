@@ -33,12 +33,8 @@ export default function BarcodeScreen({ navigation }) {
     const imageURL = barcodeData.products[0].images[0];
     const carbonFootprint = ditchCarbonData.carbon_footprint;
 
-    setBasket((currState) => [
-      ...currState,
-      { id: barcodeNum, name, carbonFootprint, imageURL, quantity: 1 },
-    ]);
-
     navigation.navigate('ConfirmItem', {
+      barcodeNum,
       name,
       imageURL,
       carbonFootprint,

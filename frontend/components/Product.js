@@ -20,10 +20,7 @@ export default function Product({
         </Text>
         <Text style={styles.itemCarbonFootprint}>Quantity: {quantity}</Text>
       </View>
-      <Text style={styles.itemName}>
-        {totalCarbonFootprint}{' '}
-        <Text style={styles.itemCarbonFootprint}>kgco2</Text>
-      </Text>
+      <Text style={styles.itemName}>{totalCarbonFootprint}</Text>
     </View>
   );
 }

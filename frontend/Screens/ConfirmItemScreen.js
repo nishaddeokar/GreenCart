@@ -6,10 +6,33 @@ import {
   TouchableOpacity,
   Text,
   Image,
+  TextInput,
 } from 'react-native';
-import Product from '../components/Product';
+import NumericInput from 'react-native-numeric-input';
+import { useAppContext } from '../context/AppContext';
 
 export default function ConfirmItemScreen({ navigation, route }) {
+  const { setBasket } = useAppContext();
+  const [quantity, setQuantity] = useState(1);
+
+  function handleProductAdd() {
+    const barcodeNum = route.params.barcodeNum;
+    const name = route.params.name;
+    const imageURL = route.params.imageURL;
+    carbonFootprint = route.params.carbonFootprint;
+
+    setBasket((currState) => [
+      ...currState,
+      { id: barcodeNum, name, carbonFootprint, imageURL, quantity },
+    ]);
+    navigation.navigate('Home', {
+      name,
+      imageURL,
+      carbonFootprint,
+      quantity,
+    });
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{route.params.name}</Text>
@@ -21,20 +44,32 @@ export default function ConfirmItemScreen({ navigation, route }) {
       />
       <Text style={styles.text}>Carbon Rating (Lower is better):</Text>
       <Text style={styles.text2}>
-        {route.params.carbonFootprint.toFixed(2)}
+        {route.params.carbonFootprint.toFixed(2)} kgco2
       </Text>
 
-      <View style={{ height: '10%' }} />
-      <AppButton
-        title='Add Product'
-        onPress={() =>
-          navigation.navigate('Home', {
-            name: route.params.name,
-            imageURL: route.params.imageURL,
-            carbonFootprint: route.params.carbonFootprint,
-          })
-        }
-      />
+      <View style={{ height: '5%' }} />
+      <View style={styles.quantityContainer}>
+        <Text style={styles.text}>Quantity:</Text>
+        <View style={styles.quantityContainer}>
+          <NumericInput
+            value={quantity}
+            onChange={setQuantity}
+            minValue={1}
+            totalWidth={80}
+            totalHeight={50}
+            iconSize={25}
+            step={1}
+            valueType='real'
+            rounded
+            textColor='#B0228C'
+            iconStyle={{ color: 'white' }}
+            rightButtonBackgroundColor='#EA3788'
+            leftButtonBackgroundColor='#E56B70'
+          />
+        </View>
+      </View>
+      <View style={{ height: '5%' }} />
+      <AppButton title='Add Product' onPress={handleProductAdd} />
       <View style={{ height: '7%' }} />
       <AppButton title='Cancel' onPress={() => navigation.navigate('Scan')} />
       <View style={{ height: '10%' }} />
@@ -67,6 +102,20 @@ const styles = StyleSheet.create({
   text2: {
     fontSize: 40,
     marginVertical: 10,
+  },
+  quantityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+  },
+  quantityInput: {
+    marginLeft: 10,
+    borderWidth: 1,
+    borderColor: 'gray',
+    padding: 5,
+    width: 40,
+    textAlign: 'center',
   },
 });
 

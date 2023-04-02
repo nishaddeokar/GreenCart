@@ -17,7 +17,9 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <View style={styles.headingContainer}>
         <Text style={styles.headingText}>Name</Text>
-        <Text style={styles.headingText}>Total</Text>
+        <Text style={styles.headingText}>
+          Total <Text style={styles.itemCarbonFootprint}>(kgco2)</Text>
+        </Text>
       </View>
       <Basket />
       {/* Total carbon footprint row */}
