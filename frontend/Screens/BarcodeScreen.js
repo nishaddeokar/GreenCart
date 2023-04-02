@@ -8,6 +8,7 @@ import { useAppContext } from '../context/AppContext';
 export default function BarcodeScreen({ navigation }) {
   const { basket, setBasket } = useAppContext();
   const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
 
   async function getBarCodeScannerPermissions() {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -22,6 +23,8 @@ export default function BarcodeScreen({ navigation }) {
     if (basket.some((product) => product.id == barcodeNum)) {
       return;
     }
+
+    setScanned(true);
 
     const barcodeData = await getBarcodeData(barcodeNum, true);
     const ditchCarbonData = await getDitchCarbonData(
@@ -38,6 +41,7 @@ export default function BarcodeScreen({ navigation }) {
       name,
       imageURL,
       carbonFootprint,
+      setScanned,
     });
   }
 
@@ -50,7 +54,7 @@ export default function BarcodeScreen({ navigation }) {
 
   return (
     <BarCodeScanner
-      onBarCodeScanned={handleBarCodeScanned}
+      onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
       style={StyleSheet.absoluteFillObject}
     />
   );

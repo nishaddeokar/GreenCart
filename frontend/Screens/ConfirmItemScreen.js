@@ -19,12 +19,16 @@ export default function ConfirmItemScreen({ navigation, route }) {
     const barcodeNum = route.params.barcodeNum;
     const name = route.params.name;
     const imageURL = route.params.imageURL;
-    carbonFootprint = route.params.carbonFootprint;
+    const carbonFootprint = route.params.carbonFootprint;
+    const setScanned = route.params.setScanned;
 
     setBasket((currState) => [
       ...currState,
       { id: barcodeNum, name, carbonFootprint, imageURL, quantity },
     ]);
+
+    setScanned(false);
+
     navigation.navigate('Home', {
       name,
       imageURL,
