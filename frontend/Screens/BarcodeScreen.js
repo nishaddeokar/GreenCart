@@ -22,8 +22,9 @@ export default function BarcodeScreen({ navigation }) {
     if (basket.some((product) => product.id == barcodeNum)) {
       return;
     }
-
-    const barcodeData = await getBarcodeData(barcodeNum, false);
+    console.log(barcodeNum);
+    const barcodeData = await getBarcodeData(barcodeNum, true);
+    console.log(barcodeData);
     const ditchCarbonData = await getDitchCarbonData(
       barcodeData.products[0],
       false
