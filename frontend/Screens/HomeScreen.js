@@ -6,9 +6,10 @@ import Basket from '../components/Basket';
 export default function HomeScreen() {
   const navigation = useNavigation();
 
-  const handleScanPress = () => {
-    navigation.navigate('Scan');
-  };
+  // Calculate the total carbon footprint
+  const totalCarbonFootprint = items.reduce((acc, item) => {
+    return acc + item.carbonFootprint * item.quantity;
+  }, 0);
 
   return (
     <View style={styles.container}>
@@ -62,19 +63,20 @@ const styles = StyleSheet.create({
     color: '#777',
   },
   buttonContainer: {
-    position: 'absolute',
-    bottom: 20,
+    // position: 'absolute',
+    bottom: '1.5%',
     alignSelf: 'center',
   },
   button: {
     backgroundColor: '#4CAF50',
-    borderRadius: 10,
-    padding: 10,
-    minWidth: 100,
+    borderRadius: 100,
+    padding: '7%',
+    minWidth: '60%',
     alignItems: 'center',
   },
   buttonText: {
     color: 'white',
     fontWeight: 'bold',
+    fontSize: 30,
   },
 });
