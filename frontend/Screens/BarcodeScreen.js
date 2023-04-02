@@ -3,8 +3,10 @@ import { Text, StyleSheet } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import getBarcodeData from '../utilities/barcodeConverter';
 import getDitchCarbonData from '../utilities/ditchCarbon';
+import { useAppContext } from '../context/AppContext';
 
 export default function BarcodeScreen({ navigation }) {
+  const { basket, setBasket } = useAppContext();
   const [hasPermission, setHasPermission] = useState(null);
 
   async function getBarCodeScannerPermissions() {
@@ -17,16 +19,29 @@ export default function BarcodeScreen({ navigation }) {
   }, []);
 
   async function handleBarCodeScanned({ data: barcodeNum }) {
+    if (basket.some((product) => product.id == barcodeNum)) {
+      return;
+    }
+
     const barcodeData = await getBarcodeData(barcodeNum, false);
     const ditchCarbonData = await getDitchCarbonData(
       barcodeData.products[0],
       false
     );
 
+    const name = barcodeData.products[0].title;
+    const imageURL = barcodeData.products[0].images[0];
+    const carbonFootprint = ditchCarbonData.carbon_footprint;
+
+    setBasket((currState) => [
+      ...currState,
+      { id: barcodeNum, name, carbonFootprint, imageURL, quantity: 1 },
+    ]);
+
     navigation.navigate('ConfirmItem', {
-      name: barcodeData.products[0].title,
-      imageURL: barcodeData.products[0].images[0],
-      carbonFootprint: ditchCarbonData.carbon_footprint,
+      name,
+      imageURL,
+      carbonFootprint,
     });
   }
 

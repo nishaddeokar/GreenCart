@@ -617,3 +617,30 @@ export const tempData3 = {
   kgco2: 3.092626914940425,
   model: 'Food Beverage',
 };
+
+export const tempData4 = [
+  {
+    id: '1',
+    name: 'Product 1',
+    carbonFootprint: 5.0,
+    imageURL:
+      'https://images.unsplash.com/photo-1569738287709-043a6b8f6f8a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3VucmlzZWFyY2h8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80',
+    quantity: 3,
+  },
+  {
+    id: '2',
+    name: 'Product 2',
+    carbonFootprint: 7.5,
+    imageURL:
+      'https://cdn.pixabay.com/photo/2016/03/27/18/54/technology-1283624_960_720.jpg',
+    quantity: 6,
+  },
+  {
+    id: '3',
+    name: 'Product 3',
+    carbonFootprint: 3.2,
+    imageURL:
+      'https://cdn.pixabay.com/photo/2017/08/07/14/53/aircraft-2603167_960_720.jpg',
+    quantity: 1,
+  },
+];
