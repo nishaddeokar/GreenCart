@@ -2,7 +2,7 @@ import { StyleSheet, View, Button } from 'react-native';
 import Product from '../components/Product';
 
 export default function HomeScreen({ navigation, route }) {
-  console.log(route.params);
+  // console.log(route.params);
   return (
     <View style={styles.container}>
       {route.params && (
