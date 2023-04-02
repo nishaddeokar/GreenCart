@@ -16,7 +16,7 @@ export default function Product({ name, imageURL, carbonFootprint }) {
         <Text>{name}</Text>
       </View>
       <View style={{ flexGrow: 1 }}>
-        <Text style={{ textAlign: "right" }}>{carbonFootprint}</Text>
+        <Text style={{ textAlign: "right" }}>{carbonFootprint.toFixed(2)}</Text>
       </View>
     </SafeAreaView>
   );
