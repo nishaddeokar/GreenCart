@@ -7,65 +7,70 @@ import {
   Text,
   Image,
 } from 'react-native';
-import Product from '../components/Product';
 
 export default function ConfirmItemScreen({ navigation, route }) {
-  //   console.log(route.params);
   return (
     <View style={styles.container}>
-      <Text style={styles3}>{route.params.name}</Text>
+      <Text style={styles.text}>{route.params.name}</Text>
       <Image
-        style={{ width: 250, height: 250, padding: 20 }}
+        style={styles.image}
         source={{
           uri: route.params.imageURL,
         }}
       />
-      <Text style={styles3}>Carbon Rating 1-5 (Low-High):</Text>
-      <Text style={styles3}>{route.params.carbonFootprint}</Text>
+      <Text style={styles.text}>Carbon Rating (Lower is better):</Text>
+      <Text style={styles.text2}>
+        {route.params.carbonFootprint.toFixed(2)}
+      </Text>
 
+      <View style={{ height: '10%' }} />
       <AppButton
         title='Add Product'
         onPress={() => navigation.navigate('Scan')}
       />
 
-      <View style={{ height: 10 }} />
-
+      <View style={{ height: '7%' }} />
       <AppButton title='Cancel' onPress={() => navigation.navigate('Scan')} />
+      <View style={{ height: '10%' }} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
   },
-});
-
-const styles2 = StyleSheet.create({
-  // ...
-  appButtonDisabled: {
-    backgroundColor: '#000',
+  imageContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 20,
+  },
+  image: {
+    width: 250,
+    height: 250,
+  },
+  text: {
+    fontSize: 20,
+    marginVertical: 10,
+  },
+  text2: {
+    fontSize: 40,
+    marginVertical: 10,
   },
 });
 
-const styles3 = StyleSheet.create({
-  // Bold text
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontSize: 20,
-});
-
-const AppButton = ({ title }) => {
+const AppButton = ({ title, onPress }) => {
   const [isDisabled, setDisabled] = useState(false);
 
   const handlePress = () => {
     setDisabled(true);
     setTimeout(() => setDisabled(false), 100);
-    () => navigation.navigate('HomePage');
+    onPress();
   };
 
   return (
@@ -81,3 +86,9 @@ const AppButton = ({ title }) => {
     </TouchableOpacity>
   );
 };
+
+const styles2 = StyleSheet.create({
+  appButtonDisabled: {
+    backgroundColor: '#000',
+  },
+});
