@@ -23,10 +23,10 @@ export default function BarcodeScreen({ navigation }) {
       return;
     }
 
-    const barcodeData = await getBarcodeData(barcodeNum, false);
+    const barcodeData = await getBarcodeData(barcodeNum, true);
     const ditchCarbonData = await getDitchCarbonData(
       barcodeData.products[0],
-      false
+      true
     );
 
     const name = barcodeData.products[0].title;
